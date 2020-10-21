@@ -2,7 +2,8 @@ import React, { createContext, PureComponent } from "react";
 
 let TodoType;
 
-const { Provider, Consumer } = (TodoType = createContext());
+const TodoContext = (TodoType = createContext());
+const { Provider, Consumer } = TodoContext;
 
 const TodoConsumer = Consumer;
 
@@ -40,7 +41,7 @@ class TodoProvider extends PureComponent {
     const filterIndex = list.findIndex((e) => e.id === id);
     list[filterIndex].completed = true;
     this.setState({ list });
-    console.log(`finish item ${id}`)
+    console.log(`finish item ${id}`);
   };
 
   render() {
@@ -54,6 +55,6 @@ class TodoProvider extends PureComponent {
   }
 }
 
-export { TodoProvider, TodoConsumer, TodoType };
+export { TodoProvider, TodoConsumer, TodoType, TodoContext };
 
 export default {};

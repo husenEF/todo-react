@@ -37,7 +37,6 @@ const TestApp2 = () => {
   );
 };
 
-const TesContext = React.createContext({ users: [], loading: true });
 
 const useFetch = (url) => {
   const [data, setData] = useState([]);
@@ -63,9 +62,13 @@ const useFetch = (url) => {
   return React.useMemo(() => ({ data, loading }), [data, loading]);
 };
 
+const UserContext = React.createContext({ users: [], loading: true });
+
 const UserProvider = ({ children }) => {
+
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+
   const getUsers = async () => {
     setLoading(true);
     try {
@@ -87,7 +90,7 @@ const UserProvider = ({ children }) => {
     data,
   ]);
   return (
-    <TesContext.Provider value={useDataValue}>{children}</TesContext.Provider>
+    <UserContext.Provider value={useDataValue}>{children}</UserContext.Provider>
   );
 };
-const useUser = () => useContext(TesContext);
+const useUser = () => useContext(UserContext);
