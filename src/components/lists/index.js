@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Icon, InlineIcon } from "@iconify/react";
+import { Icon } from "@iconify/react";
 import crossIcon from "@iconify/icons-entypo/cross";
 
 const Item = () => {
