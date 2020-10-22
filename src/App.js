@@ -1,8 +1,13 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  NavLink,
+} from "react-router-dom";
 
-import { UserContextMaster } from "./context";
-import { Home, User, User2 } from "./pages";
+import { UserContextMaster, ArticleContentMaster } from "./context";
+import { Home, User, User2, Articles } from "./pages";
 
 import "./App.css";
 
@@ -28,20 +33,42 @@ export default function App() {
 
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav mr-auto">
-              <li className="nav-item active">
-                <Link to="/" className="nav-link">
+              <li className="nav-item">
+                <NavLink
+                  activeClassName="active"
+                  to="/"
+                  className="nav-link"
+                  exact
+                >
                   Home
-                </Link>
+                </NavLink>
               </li>
               <li className="nav-item">
-                <Link to="/users" className="nav-link">
+                <NavLink
+                  activeClassName="active"
+                  to="/users"
+                  className="nav-link"
+                >
                   Users
-                </Link>
+                </NavLink>
               </li>
               <li className="nav-item">
-                <Link to="/users2" className="nav-link">
+                <NavLink
+                  activeClassName="active"
+                  to="/users2"
+                  className="nav-link"
+                >
                   Users 2
-                </Link>
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink
+                  activeClassName="active"
+                  to="/articles"
+                  className="nav-link"
+                >
+                  Articles
+                </NavLink>
               </li>
             </ul>
           </div>
@@ -54,6 +81,11 @@ export default function App() {
           </Route>
           <Route path="/users">
             <User />
+          </Route>
+          <Route path="/articles">
+            <ArticleContentMaster.ArticleProvider>
+              <Articles />
+            </ArticleContentMaster.ArticleProvider>
           </Route>
           <Route path="/">
             <Home />

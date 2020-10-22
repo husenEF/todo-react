@@ -1,23 +1,18 @@
-/* export:
-- providev
-- consumer
-*/
-
 import React, { createContext, useContext, useEffect, useState } from "react";
 
-const UserContext = createContext({ users: [], loading: true });
+const ArticleContext = createContext({ data: [], loading: true });
 
-const UserProvider = (props) => {
+const ArticleProvider = (props) => {
   const { children } = props;
 
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const getUser = async () => {
+  const getData = async () => {
     setLoading(true);
     try {
       const response = await fetch(
-        "https://jsonplaceholder.typicode.com/users"
+        "https://jsonplaceholder.typicode.com/posts"
       );
       const data = await response.json();
       setData(data);
@@ -28,22 +23,21 @@ const UserProvider = (props) => {
   };
 
   useEffect(() => {
-    getUser();
-  },[]);
+    getData();
+  }, []);
 
-  
-
-  const userData = {
-    getUser,
+  const ArticleData = {
     data,
     loading,
   };
 
   return (
-    <UserContext.Provider value={userData}>{children}</UserContext.Provider>
+    <ArticleContext.Provider value={ArticleData}>
+      {children}
+    </ArticleContext.Provider>
   );
 };
 
-const useUser = () => useContext(UserContext);
+const useArticle = () => useContext(ArticleContext);
 
-export default { UserProvider, useUser, UserContext };
+export default { ArticleProvider, ArticleContext, useArticle };
