@@ -1,7 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-import { Home, User } from "./pages";
+import { UserContextMaster } from "./context";
+import { Home, User, User2 } from "./pages";
 
 import "./App.css";
 
@@ -22,25 +23,35 @@ export default function App() {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span class="navbar-toggler-icon"></span>
+            <span className="navbar-toggler-icon"></span>
           </button>
 
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav mr-auto">
-              <li class="nav-item active">
+              <li className="nav-item active">
                 <Link to="/" className="nav-link">
                   Home
                 </Link>
               </li>
-              <li class="nav-item">
+              <li className="nav-item">
                 <Link to="/users" className="nav-link">
                   Users
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/users2" className="nav-link">
+                  Users 2
                 </Link>
               </li>
             </ul>
           </div>
         </nav>
         <Switch>
+          <Route path="/users2">
+            <UserContextMaster.UserProvider>
+              <User2 />
+            </UserContextMaster.UserProvider>
+          </Route>
           <Route path="/users">
             <User />
           </Route>
@@ -51,8 +62,4 @@ export default function App() {
       </div>
     </Router>
   );
-}
-
-function Users() {
-  return <h2>Users</h2>;
 }
